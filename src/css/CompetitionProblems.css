@@ -38,6 +38,43 @@
   gap: 12px;
 }
 
+.cp-pagination {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.cp-page-btn {
+  padding: 8px 14px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #e5e7eb;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: all 0.2s;
+}
+
+.cp-page-btn:hover:not(:disabled) {
+  border-color: #8b5cf6;
+  color: #ffffff;
+  background: rgba(139, 92, 246, 0.14);
+}
+
+.cp-page-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.cp-page-indicator {
+  font-size: 0.85rem;
+  color: #a5b4fc;
+  min-width: 56px;
+  text-align: center;
+}
+
 .cp-card {
   display: flex;
   justify-content: space-between;

@@ -198,6 +198,7 @@ body::before {
 
 .auth-card {
   background: var(--bg-card);
+  -webkit-backdrop-filter: blur(20px);
   backdrop-filter: blur(20px);
   border-radius: var(--radius-xl);
   padding: 48px;

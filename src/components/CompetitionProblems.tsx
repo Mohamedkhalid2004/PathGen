@@ -1,6 +1,6 @@
 'use strict';
 
-import React from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import '../css/CompetitionProblems.css';
 import { CheckCircle, Circle, ChevronRight } from 'lucide-react';
 import type { CompetitionProblem } from '../types';
@@ -16,6 +16,21 @@ const CompetitionProblems: React.FC<Props> = ({
   selectedProblem,
   onSelectProblem,
 }) => {
+  const PAGE_SIZE = 6;
+  const [currentPage, setCurrentPage] = useState<number>(1);
+
+  const totalPages = Math.max(1, Math.ceil(problems.length / PAGE_SIZE));
+
+  const paginatedProblems = useMemo(() => {
+    const start = (currentPage - 1) * PAGE_SIZE;
+    const end = start + PAGE_SIZE;
+    return problems.slice(start, end);
+  }, [problems, currentPage]);
+
+  useEffect(() => {
+    setCurrentPage((prevPage) => Math.min(prevPage, totalPages));
+  }, [totalPages]);
+
   const getDifficultyColor = (difficulty: string): string => {
     switch (difficulty) {
       case 'easy': return '#10b981';
@@ -38,11 +53,14 @@ const CompetitionProblems: React.FC<Props> = ({
     <div className="cp-container">
       <div className="cp-header">
         <h3>Problems ({problems.length})</h3>
-        <p>Select a problem to start coding</p>
+        <p>
+          Select a problem to start coding
+          {problems.length > 0 && ` • Page ${currentPage} of ${totalPages}`}
+        </p>
       </div>
 
       <div className="cp-grid">
-        {problems.map((problem) => {
+        {paginatedProblems.map((problem) => {
           const isSolved = problem.user_solved === true;
           const isSelected = selectedProblem?.id === problem.id;
 
@@ -80,6 +98,30 @@ const CompetitionProblems: React.FC<Props> = ({
           );
         })}
       </div>
+
+      {totalPages > 1 && (
+        <div className="cp-pagination" aria-label="Problems pagination">
+          <button
+            type="button"
+            className="cp-page-btn"
+            onClick={() => setCurrentPage((prevPage) => Math.max(1, prevPage - 1))}
+            disabled={currentPage === 1}
+          >
+            Previous
+          </button>
+
+          <span className="cp-page-indicator">{currentPage} / {totalPages}</span>
+
+          <button
+            type="button"
+            className="cp-page-btn"
+            onClick={() => setCurrentPage((prevPage) => Math.min(totalPages, prevPage + 1))}
+            disabled={currentPage === totalPages}
+          >
+            Next
+          </button>
+        </div>
+      )}
     </div>
   );
 };

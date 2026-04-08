@@ -12,8 +12,15 @@ interface Props {
 }
 
 const CompetitionLeaderboard: React.FC<Props> = ({ competitionId, userId }) => {
+  const PAGE_SIZE = 10;
   const [leaderboard, setLeaderboard] = useState<CompetitionLeaderboardEntry[]>([]);
+  const [currentPage, setCurrentPage] = useState<number>(1);
   const [loading, setLoading] = useState<boolean>(true);
+
+  const totalPages = Math.max(1, Math.ceil(leaderboard.length / PAGE_SIZE));
+  const start = (currentPage - 1) * PAGE_SIZE;
+  const end = start + PAGE_SIZE;
+  const paginatedEntries = leaderboard.slice(start, end);
 
   const loadLeaderboard = async (): Promise<void> => {
     try {
@@ -33,6 +40,10 @@ const CompetitionLeaderboard: React.FC<Props> = ({ competitionId, userId }) => {
     const interval = setInterval(loadLeaderboard, 30000);
     return () => clearInterval(interval);
   }, [competitionId]);
+
+  useEffect(() => {
+    setCurrentPage((prevPage) => Math.min(prevPage, totalPages));
+  }, [totalPages]);
 
   const getRankDisplay = (rank: number): React.ReactNode => {
     if (rank === 1) return <Medal size={20} color="#fbbf24" />;
@@ -65,6 +76,7 @@ const CompetitionLeaderboard: React.FC<Props> = ({ competitionId, userId }) => {
         <h3>
           <Trophy size={20} />
           Leaderboard
+          <span className="cl-page-meta">Page {currentPage} of {totalPages}</span>
         </h3>
         <button
           type="button"
@@ -87,7 +99,7 @@ const CompetitionLeaderboard: React.FC<Props> = ({ competitionId, userId }) => {
         </div>
 
         <div className="cl-table-body">
-          {leaderboard.map((entry) => {
+          {paginatedEntries.map((entry) => {
             const isCurrentUser = entry.user_id === userId;
 
             return (
@@ -108,6 +120,30 @@ const CompetitionLeaderboard: React.FC<Props> = ({ competitionId, userId }) => {
           })}
         </div>
       </div>
+
+      {totalPages > 1 && (
+        <div className="cl-pagination" aria-label="Leaderboard pagination">
+          <button
+            type="button"
+            className="cl-page-btn"
+            onClick={() => setCurrentPage((prevPage) => Math.max(1, prevPage - 1))}
+            disabled={currentPage === 1}
+          >
+            Previous
+          </button>
+
+          <span className="cl-page-indicator">{currentPage} / {totalPages}</span>
+
+          <button
+            type="button"
+            className="cl-page-btn"
+            onClick={() => setCurrentPage((prevPage) => Math.min(totalPages, prevPage + 1))}
+            disabled={currentPage === totalPages}
+          >
+            Next
+          </button>
+        </div>
+      )}
     </div>
   );
 };

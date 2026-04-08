@@ -1,0 +1,286 @@
+/* =========================================================
+   QuestionOfTheDay.css — QOTD daily popup modal
+   ========================================================= */
+
+.qotd-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 10, 25, 0.72);
+  backdrop-filter: blur(6px);
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  animation: qotd-fade-in 0.22s ease;
+}
+
+@keyframes qotd-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.qotd-modal {
+  background: #ffffff;
+  border-radius: 1.75rem;
+  max-width: 500px;
+  width: 100%;
+  box-shadow: 0 32px 72px rgba(102, 126, 234, 0.22), 0 8px 24px rgba(0,0,0,0.18);
+  overflow: hidden;
+  animation: qotd-slide-in 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes qotd-slide-in {
+  from { transform: translateY(-22px) scale(0.96); opacity: 0; }
+  to   { transform: translateY(0)     scale(1);    opacity: 1; }
+}
+
+/* ----- Header band ----- */
+.qotd-header {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 1.25rem 1.5rem 1.1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  position: relative;
+}
+
+.qotd-header-icon {
+  width: 38px;
+  height: 38px;
+  background: rgba(255,255,255,0.18);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: #fff;
+}
+
+.qotd-title-row {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.qotd-title-row span:first-child {
+  font-weight: 700;
+  font-size: 1rem;
+  color: #fff;
+  letter-spacing: 0.01em;
+}
+
+.qotd-title-row span:last-child {
+  font-size: 0.72rem;
+  color: rgba(255,255,255,0.72);
+  font-weight: 500;
+  margin-top: 1px;
+}
+
+.qotd-streak-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  background: rgba(255,255,255,0.2);
+  border: 1px solid rgba(255,255,255,0.35);
+  color: #fff;
+  padding: 0.3rem 0.75rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  white-space: nowrap;
+  backdrop-filter: blur(4px);
+}
+
+.qotd-close-btn {
+  background: rgba(255,255,255,0.15);
+  border: 1px solid rgba(255,255,255,0.25);
+  cursor: pointer;
+  color: #fff;
+  padding: 0.35rem;
+  display: flex;
+  align-items: center;
+  border-radius: 0.6rem;
+  transition: background 0.15s;
+  flex-shrink: 0;
+}
+.qotd-close-btn:hover { background: rgba(255,255,255,0.28); }
+
+/* ----- Body section ----- */
+.qotd-body {
+  padding: 1.5rem 1.75rem 1.75rem;
+}
+
+/* ----- Category tag ----- */
+.qotd-category-tag {
+  display: inline-flex;
+  align-items: center;
+  background: #ede9fe;
+  color: #5b21b6;
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.2rem 0.65rem;
+  border-radius: 999px;
+  margin-bottom: 1rem;
+  border: 1px solid #ddd6fe;
+}
+
+/* ----- Question text ----- */
+.qotd-question {
+  font-size: 1.12rem;
+  font-weight: 700;
+  color: #111827;
+  margin: 0 0 1.25rem;
+  line-height: 1.6;
+}
+
+/* ----- Options ----- */
+.qotd-options {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  margin-bottom: 1.25rem;
+}
+
+.qotd-option {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 0.8rem 1rem;
+  border: 2px solid #e5e7eb;
+  border-radius: 0.875rem;
+  background: #fafafa;
+  cursor: pointer;
+  font-size: 0.93rem;
+  font-weight: 500;
+  color: #1f2937;
+  text-align: left;
+  width: 100%;
+  transition: border-color 0.15s, background 0.15s, transform 0.1s;
+}
+.qotd-option:hover:not(:disabled) {
+  border-color: #667eea;
+  background: #f5f3ff;
+  transform: translateX(3px);
+}
+.qotd-option:disabled { cursor: default; }
+
+.qotd-option-dim {
+  opacity: 0.4;
+}
+
+.qotd-option-correct {
+  border-color: #10b981 !important;
+  background: #ecfdf5 !important;
+  opacity: 1 !important;
+  color: #064e3b !important;
+}
+.qotd-option-correct .qotd-option-letter {
+  background: #10b981;
+  color: #fff;
+  border-color: #10b981;
+}
+
+.qotd-option-wrong {
+  border-color: #ef4444 !important;
+  background: #fef2f2 !important;
+  opacity: 1 !important;
+  color: #7f1d1d !important;
+}
+.qotd-option-wrong .qotd-option-letter {
+  background: #ef4444;
+  color: #fff;
+  border-color: #ef4444;
+}
+
+.qotd-option-letter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: #fff;
+  border: 2px solid #d1d5db;
+  font-weight: 800;
+  font-size: 0.78rem;
+  color: #6b7280;
+  flex-shrink: 0;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+
+/* ----- Feedback ----- */
+.qotd-feedback {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.9rem;
+  padding: 1rem 1.1rem;
+  border-radius: 0.875rem;
+  margin-bottom: 1.1rem;
+  font-size: 0.88rem;
+  line-height: 1.5;
+  animation: qotd-feedback-in 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes qotd-feedback-in {
+  from { transform: scale(0.95) translateY(6px); opacity: 0; }
+  to   { transform: scale(1)    translateY(0);   opacity: 1; }
+}
+
+.qotd-feedback-correct {
+  background: #ecfdf5;
+  border: 1.5px solid #6ee7b7;
+  color: #065f46;
+}
+.qotd-feedback-wrong {
+  background: #fef2f2;
+  border: 1.5px solid #fca5a5;
+  color: #991b1b;
+}
+
+.qotd-feedback-icon {
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.qotd-feedback strong { display: block; font-weight: 700; font-size: 0.95rem; margin-bottom: 0.3rem; }
+.qotd-feedback p { margin: 0; opacity: 0.85; }
+
+/* ----- Action buttons ----- */
+.qotd-continue-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 0.85rem;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: #fff;
+  border: none;
+  border-radius: 0.875rem;
+  font-size: 0.97rem;
+  font-weight: 700;
+  cursor: pointer;
+  letter-spacing: 0.01em;
+  transition: opacity 0.15s, transform 0.1s;
+  box-shadow: 0 4px 14px rgba(102, 126, 234, 0.4);
+}
+.qotd-continue-btn:hover { opacity: 0.9; transform: translateY(-1px); }
+.qotd-continue-btn:active { transform: translateY(0); }
+
+.qotd-skip-btn {
+  display: block;
+  width: 100%;
+  padding: 0.6rem;
+  background: none;
+  color: #9ca3af;
+  border: none;
+  font-size: 0.82rem;
+  cursor: pointer;
+  transition: color 0.15s;
+  margin-top: 0.35rem;
+  text-align: center;
+}
+.qotd-skip-btn:hover { color: #4b5563; }

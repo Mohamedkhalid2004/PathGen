@@ -1,0 +1,253 @@
+
+.resume-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.resume-header-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.resume-download-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 28px;
+  font-size: 15px;
+  font-weight: 700;
+  border-radius: 10px;
+  white-space: nowrap;
+}
+
+.resume-paper {
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.10);
+  overflow: hidden;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  color: #1e1e1e;
+}
+
+.resume-hero {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 36px 40px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.resume-hero-avatar {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  width: 72px;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.resume-name {
+  font-size: 28px;
+  font-weight: 800;
+  margin: 0 0 6px 0;
+  letter-spacing: 0.5px;
+}
+
+.resume-role {
+  font-size: 14px;
+  opacity: 0.9;
+  margin: 0;
+  font-weight: 500;
+}
+
+.resume-body {
+  padding: 32px 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.resume-section {
+  border-top: 2px solid #f0f0f0;
+  padding-top: 20px;
+}
+
+.resume-section:first-child {
+  border-top: none;
+  padding-top: 0;
+}
+
+.resume-section-heading {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #667eea;
+  margin-bottom: 14px;
+  border-left: 3px solid #667eea;
+  padding-left: 10px;
+}
+
+.resume-count-badge {
+  background: #667eea;
+  color: white;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 20px;
+  margin-left: 4px;
+}
+
+.resume-objective {
+  font-size: 14px;
+  line-height: 1.7;
+  color: #444;
+  margin: 0;
+}
+
+.resume-edu-row {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.resume-edu-degree {
+  font-size: 15px;
+  font-weight: 700;
+  color: #1e1e1e;
+}
+
+.resume-edu-meta {
+  font-size: 13px;
+  color: #888;
+}
+
+.resume-skills-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.resume-skill-chip {
+  background: #f0f3ff;
+  color: #4a5dcc;
+  border: 1px solid #c7d0f8;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 5px 14px;
+  border-radius: 20px;
+}
+
+.resume-projects-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.resume-project-item {
+  background: #fafbff;
+  border: 1px solid #e8ecf8;
+  border-radius: 10px;
+  padding: 16px 20px;
+}
+
+.resume-project-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 6px;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.resume-project-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: #1e1e1e;
+}
+
+.resume-diff-badge {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 12px;
+  text-transform: capitalize;
+}
+
+.resume-diff-beginner  { background: #d1fae5; color: #065f46; }
+.resume-diff-intermediate { background: #fef3c7; color: #92400e; }
+.resume-diff-advanced  { background: #fee2e2; color: #991b1b; }
+
+.resume-project-desc {
+  font-size: 13px;
+  color: #555;
+  line-height: 1.6;
+  margin: 0 0 8px 0;
+}
+
+.resume-project-meta {
+  display: flex;
+  gap: 8px;
+  font-size: 12px;
+  color: #999;
+}
+
+.resume-empty {
+  font-size: 13px;
+  color: #aaa;
+  font-style: italic;
+  margin: 0;
+}
+
+.resume-footer {
+  background: #f5f7fa;
+  text-align: center;
+  padding: 14px;
+  font-size: 11px;
+  color: #bbb;
+  border-top: 1px solid #eee;
+}
+
+.resume-certs-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.resume-cert-item {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.resume-cert-name {
+  font-size: 14px;
+  font-weight: 700;
+  color: #1e1e1e;
+}
+
+.resume-cert-meta {
+  font-size: 13px;
+  color: #888;
+}
+
+@media (max-width: 640px) {
+  .resume-hero { padding: 24px 20px; gap: 16px; }
+  .resume-body { padding: 20px; }
+  .resume-hero-avatar { width: 54px; height: 54px; }
+  .resume-name { font-size: 22px; }
+  .resume-header-card { flex-direction: column; align-items: flex-start; }
+  .resume-download-btn { width: 100%; justify-content: center; }
+}

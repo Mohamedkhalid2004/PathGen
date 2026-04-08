@@ -1,0 +1,199 @@
+/* CompetitionLeaderboard.css */
+
+.cl-container {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+}
+
+/* Loading State */
+.cl-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 300px;
+  gap: 16px;
+  color: #a5b4fc;
+}
+
+.cl-spinner {
+  width: 32px;
+  height: 32px;
+  border: 3px solid rgba(99, 102, 241, 0.3);
+  border-top-color: #6366f1;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Empty State */
+.cl-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 300px;
+  gap: 16px;
+  color: #9ca3af;
+}
+
+/* Header */
+.cl-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.cl-header h3 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  color: #ffffff;
+  font-size: 1rem;
+}
+
+.cl-refresh {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  cursor: pointer;
+  color: #a5b4fc;
+  transition: all 0.2s;
+}
+
+.cl-refresh:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+}
+
+.cl-refresh:disabled {
+  opacity: 0.5;
+}
+
+.cl-refresh .spinning {
+  animation: spin 1s linear infinite;
+}
+
+/* Table */
+.cl-table {
+  width: 100%;
+}
+
+.cl-table-header {
+  display: grid;
+  grid-template-columns: 80px 1fr 120px 100px 80px;
+  padding: 12px 20px;
+  background: rgba(255, 255, 255, 0.03);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #a5b4fc;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.cl-table-body {
+  max-height: 500px;
+  overflow-y: auto;
+}
+
+.cl-row {
+  display: grid;
+  grid-template-columns: 80px 1fr 120px 100px 80px;
+  padding: 14px 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  align-items: center;
+  transition: all 0.2s;
+}
+
+.cl-row:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.cl-row.current-user {
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.15) 0%, rgba(139, 92, 246, 0.1) 100%);
+  border-left: 3px solid #8b5cf6;
+}
+
+.cl-row.top-three {
+  background: linear-gradient(135deg, rgba(251, 191, 36, 0.1) 0%, rgba(245, 158, 11, 0.05) 100%);
+}
+
+.cl-row.top-three.current-user {
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.15) 0%, rgba(251, 191, 36, 0.1) 100%);
+}
+
+.cl-col-rank {
+  font-weight: 700;
+  color: #e5e7eb;
+}
+
+.cl-col-name {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 500;
+  color: #ffffff;
+}
+
+.cl-you-badge {
+  padding: 2px 8px;
+  background: linear-gradient(135deg, #8b5cf6 0%, #6366f1 100%);
+  color: white;
+  font-size: 0.625rem;
+  font-weight: 600;
+  border-radius: 10px;
+  text-transform: uppercase;
+}
+
+.cl-col-branch {
+  color: #9ca3af;
+  font-size: 0.875rem;
+}
+
+.cl-col-score {
+  font-weight: 700;
+  color: #fbbf24;
+}
+
+.cl-col-solved {
+  color: #10b981;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .cl-table-header,
+  .cl-row {
+    grid-template-columns: 60px 1fr 80px 60px;
+  }
+
+  .cl-col-branch {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .cl-table-header,
+  .cl-row {
+    grid-template-columns: 50px 1fr 60px;
+  }
+
+  .cl-col-solved {
+    display: none;
+  }
+}

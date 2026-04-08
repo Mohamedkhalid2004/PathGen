@@ -1,0 +1,343 @@
+/* CompetitionArena.css */
+
+.ca-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+/* Header */
+.ca-header {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #e5e7eb;
+  margin-bottom: 24px;
+}
+
+.ca-back-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  border: 1px solid #e5e7eb;
+  padding: 8px 16px;
+  border-radius: 8px;
+  color: #6b7280;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.ca-back-btn:hover {
+  background: #f3f4f6;
+  color: #374151;
+}
+
+.ca-problem-info h2 {
+  margin: 0 0 8px 0;
+  color: #ffffff;
+  font-size: 1.25rem;
+}
+
+.ca-badges {
+  display: flex;
+  gap: 8px;
+}
+
+.ca-difficulty {
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: white;
+}
+
+.ca-difficulty-easy { background: #10b981; }
+.ca-difficulty-medium { background: #f59e0b; }
+.ca-difficulty-hard { background: #ef4444; }
+
+.ca-points {
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  background: #6366f1;
+  color: white;
+}
+
+.ca-weekly-badge {
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+  color: #1e1b4b;
+}
+
+/* Main Layout */
+.ca-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  flex: 1;
+}
+
+/* Left Panel - Problem Description */
+.ca-left {
+  overflow-y: auto;
+}
+
+.ca-problem-card {
+  background: #f9fafb;
+  border-radius: 12px;
+  padding: 24px;
+  border: 1px solid #e5e7eb;
+}
+
+.ca-problem-card h3 {
+  margin: 0 0 16px 0;
+  color: #374151;
+  font-size: 1rem;
+}
+
+.ca-description {
+  color: #4b5563;
+  line-height: 1.6;
+  margin-bottom: 24px;
+}
+
+.ca-constraints {
+  margin-bottom: 24px;
+}
+
+.ca-constraints h4 {
+  margin: 0 0 8px 0;
+  color: #374151;
+  font-size: 0.875rem;
+}
+
+.ca-constraints ul {
+  margin: 0;
+  padding-left: 20px;
+  color: #6b7280;
+}
+
+.ca-constraints li {
+  margin-bottom: 4px;
+}
+
+.ca-example h4 {
+  margin: 0 0 8px 0;
+  color: #374151;
+  font-size: 0.875rem;
+}
+
+.ca-example-box {
+  background: #f3f4f6;
+  border-radius: 8px;
+  padding: 16px;
+  border: 1px solid #e5e7eb;
+}
+
+.ca-example-row {
+  margin-bottom: 12px;
+}
+
+.ca-example-row:last-child {
+  margin-bottom: 0;
+}
+
+.ca-example-row strong {
+  color: #6b7280;
+  font-size: 0.75rem;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.ca-example-row code {
+  color: #059669;
+  font-family: 'Fira Code', monospace;
+  display: block;
+  background: #ffffff;
+  padding: 8px;
+  border-radius: 4px;
+  border: 1px solid #e5e7eb;
+}
+
+/* Right Panel - Code Editor */
+.ca-right {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.ca-editor-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.ca-language-select {
+  padding: 8px 16px;
+  border-radius: 8px;
+  border: 1px solid #e5e7eb;
+  background: white;
+  color: #374151;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.ca-editor {
+  flex: 1;
+  min-height: 300px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #ffffff;
+}
+
+.ca-editor .cm-editor {
+  height: 100%;
+  min-height: 300px;
+  background: #ffffff;
+}
+
+.ca-editor .cm-scroller {
+  font-family: 'Fira Code', 'Consolas', monospace;
+  font-size: 14px;
+}
+
+.ca-editor .cm-content {
+  color: #1f2937;
+}
+
+.ca-editor .cm-gutters {
+  background: #f9fafb;
+  border-right: 1px solid #e5e7eb;
+  color: #9ca3af;
+}
+
+.ca-editor .cm-activeLine {
+  background: #f3f4f6;
+}
+
+.ca-editor .cm-activeLineGutter {
+  background: #f3f4f6;
+}
+
+.ca-submit-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+  color: white;
+  border: none;
+  padding: 14px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.ca-submit-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
+}
+
+.ca-submit-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.ca-spinner {
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Result Display */
+.ca-result {
+  padding: 16px;
+  border-radius: 8px;
+  animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.ca-result-passed {
+  background: rgba(16, 185, 129, 0.1);
+  border: 1px solid #10b981;
+}
+
+.ca-result-failed {
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid #ef4444;
+}
+
+.ca-result-syntax {
+  background: rgba(245, 158, 11, 0.1);
+  border: 1px solid #f59e0b;
+}
+
+.ca-result-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.ca-result-title {
+  font-weight: 700;
+  font-size: 1.25rem;
+}
+
+.ca-result-passed .ca-result-title { color: #10b981; }
+.ca-result-failed .ca-result-title { color: #ef4444; }
+.ca-result-syntax .ca-result-title { color: #f59e0b; }
+
+.ca-result-feedback {
+  color: #4b5563;
+  margin: 0;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .ca-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .ca-editor {
+    min-height: 250px;
+  }
+}
+
+@media (max-width: 640px) {
+  .ca-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .ca-badges {
+    flex-wrap: wrap;
+  }
+}

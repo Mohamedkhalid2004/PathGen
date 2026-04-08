@@ -1,0 +1,195 @@
+/* ── ExploreCareerView ───────────────────────────────────────── */
+.ecv-card {
+  max-width: 780px;
+  margin: 0 auto;
+}
+
+/* Centre-aligned helper (loading / empty) */
+.ecv-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 24px;
+  color: #6b7280;
+  text-align: center;
+  gap: 8px;
+}
+
+.ecv-empty p { margin: 0; }
+
+@keyframes ecv-spin { to { transform: rotate(360deg); } }
+.ecv-spinner { animation: ecv-spin 1s linear infinite; }
+
+.ecv-error {
+  background: #fee2e2;
+  color: #991b1b;
+  border: 1px solid #fca5a5;
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 13px;
+  margin-bottom: 16px;
+}
+
+/* Skills list */
+.ecv-skills-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.ecv-skills-count {
+  font-size: 13px;
+  color: #6b7280;
+  margin-bottom: 6px;
+}
+
+/* Individual skill card */
+.ecv-skill-card {
+  border: 1.5px solid #e5e7eb;
+  border-radius: 12px;
+  overflow: hidden;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.ecv-skill-card--open {
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.12);
+}
+
+.ecv-skill-header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 18px;
+  background: #fff;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.15s;
+}
+
+.ecv-skill-header:hover { background: #f8f9ff; }
+
+.ecv-skill-number {
+  min-width: 28px;
+  height: 28px;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.ecv-skill-info {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 2px;
+}
+
+.ecv-skill-name {
+  font-size: 15px;
+  font-weight: 700;
+  color: #1e1e1e;
+}
+
+.ecv-skill-desc {
+  font-size: 13px;
+  color: #6b7280;
+}
+
+/* Resources panel */
+.ecv-resources {
+  padding: 16px 18px;
+  background: #f9fafb;
+  border-top: 1.5px solid #e5e7eb;
+}
+
+.ecv-res-loading {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #6b7280;
+  font-size: 13px;
+  padding: 8px 0;
+}
+
+.ecv-res-empty {
+  font-size: 13px;
+  color: #9ca3af;
+  padding: 8px 0;
+  margin: 0;
+}
+
+.ecv-res-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Resource link row */
+.ecv-res-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px;
+  background: #fff;
+  border: 1.5px solid #e5e7eb;
+  border-radius: 10px;
+  text-decoration: none;
+  color: #1e1e1e;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.ecv-res-item:hover {
+  border-color: #667eea;
+  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.12);
+}
+
+.ecv-res-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.ecv-res-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.ecv-res-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: #1e1e1e;
+}
+
+.ecv-res-platform {
+  font-size: 13px;
+  color: #6b7280;
+}
+
+.ecv-res-rating {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #f59e0b;
+}
+
+@media (max-width: 640px) {
+  .ecv-skill-desc { display: none; }
+}

@@ -1,0 +1,287 @@
+import React, { useEffect, useState } from 'react';
+import { jsPDF } from 'jspdf';
+import { FileText, Download, User, Briefcase, Code, BookOpen, Award } from 'lucide-react';
+import type { StudentProfile, Skill, Project, Certification } from '../types';
+import { getProjects } from '../lib/api';
+import '../css/ResumeBuilder.css';
+
+interface Props {
+  profile: StudentProfile;
+  skills: Skill[];
+  completedProjects: string[];
+  certifications: Certification[];
+}
+
+const ResumeBuilder: React.FC<Props> = ({ profile, skills, completedProjects, certifications }) => {
+  const [projectDetails, setProjectDetails] = useState<Project[]>([]);
+  const [downloading, setDownloading] = useState(false);
+
+  const completedSkills = skills.filter(s => s.completed);
+
+  useEffect(() => {
+    if (!profile.careerPath) return;
+    getProjects(profile.careerPath)
+      .then(data => {
+        const done = data
+          .filter(d => completedProjects.includes(d.project.id))
+          .map(d => d.project);
+        setProjectDetails(done);
+      })
+      .catch(console.error);
+  }, [profile.careerPath, completedProjects]);
+
+  const careerObjective =
+    completedSkills.length > 0
+      ? `Aspiring ${profile.careerPath || profile.branch} engineer with hands-on expertise in ${
+          completedSkills
+            .slice(0, 3)
+            .map(s => s.name)
+            .join(', ')
+        }. Passionate about building real-world solutions and growing within a dynamic engineering team.`
+      : `Motivated ${profile.branch} engineering student in Year ${profile.year}, eager to grow as a ${profile.careerPath || 'software'} professional through hands-on projects and continuous learning.`;
+
+  const downloadPDF = () => {
+    setDownloading(true);
+    const doc = new jsPDF({ unit: 'mm', format: 'a4' });
+    const pageW = 210;
+    const margin = 18;
+    const contentW = pageW - margin * 2;
+    let y = 0;
+
+    doc.setFillColor(102, 126, 234);
+    doc.rect(0, 0, pageW, 38, 'F');
+    doc.setTextColor(255, 255, 255);
+    doc.setFontSize(22);
+    doc.setFont('helvetica', 'bold');
+    doc.text(profile.name, margin, 17);
+    doc.setFontSize(11);
+    doc.setFont('helvetica', 'normal');
+    doc.text(
+      `${profile.careerPath || profile.branch}  •  ${profile.branch}  •  Year ${profile.year}`,
+      margin,
+      27
+    );
+    y = 48;
+
+    const sectionHeading = (title: string) => {
+      doc.setDrawColor(102, 126, 234);
+      doc.setLineWidth(0.5);
+      doc.line(margin, y, margin + contentW, y);
+      y += 5;
+      doc.setFontSize(12);
+      doc.setFont('helvetica', 'bold');
+      doc.setTextColor(102, 126, 234);
+      doc.text(title.toUpperCase(), margin, y);
+      y += 6;
+      doc.setTextColor(30, 30, 30);
+      doc.setFont('helvetica', 'normal');
+      doc.setFontSize(10);
+    };
+
+    sectionHeading('Career Objective');
+    const objLines = doc.splitTextToSize(careerObjective, contentW);
+    doc.text(objLines, margin, y);
+    y += objLines.length * 5.5 + 8;
+
+    sectionHeading('Education');
+    doc.setFont('helvetica', 'bold');
+    doc.text(`B.E. ${profile.branch}`, margin, y);
+    doc.setFont('helvetica', 'normal');
+    doc.text(`Year ${profile.year}  (Currently Enrolled)`, margin + 60, y);
+    y += 12;
+
+    sectionHeading('Technical Skills');
+    if (completedSkills.length === 0) {
+      doc.setTextColor(150, 150, 150);
+      doc.text('No skills completed yet.', margin, y);
+      doc.setTextColor(30, 30, 30);
+      y += 10;
+    } else {
+      let col = 0;
+      const colW = contentW / 3;
+      completedSkills.forEach((skill, idx) => {
+        const cx = margin + (idx % 3) * colW;
+        const cy = y + Math.floor(idx / 3) * 7;
+        doc.text(`• ${skill.name}`, cx, cy);
+        col = Math.max(col, Math.floor(idx / 3));
+      });
+      y += (col + 1) * 7 + 8;
+    }
+
+    if (certifications.length > 0) {
+      sectionHeading('Certifications');
+      certifications.forEach(cert => {
+        doc.setFont('helvetica', 'bold');
+        doc.text(`• ${cert.name}`, margin, y);
+        doc.setFont('helvetica', 'normal');
+        doc.setTextColor(100, 100, 100);
+        const meta = `${cert.issuer}  —  ${cert.issueDate}`;
+        doc.text(meta, margin + 4, y + 5);
+        doc.setTextColor(30, 30, 30);
+        y += 12;
+      });
+      y += 4;
+    }
+
+    sectionHeading('Projects');
+    if (projectDetails.length === 0) {
+      doc.setTextColor(150, 150, 150);
+      doc.text('No projects completed yet.', margin, y);
+      doc.setTextColor(30, 30, 30);
+      y += 10;
+    } else {
+      projectDetails.forEach(p => {
+        doc.setFont('helvetica', 'bold');
+        doc.text(`${p.title}  [${p.difficulty}]`, margin, y);
+        y += 5;
+        doc.setFont('helvetica', 'normal');
+        const descLines = doc.splitTextToSize(p.description, contentW);
+        doc.text(descLines, margin + 3, y);
+        y += descLines.length * 5 + 5;
+      });
+    }
+
+    doc.setFontSize(8);
+    doc.setTextColor(150, 150, 150);
+    doc.text('Generated by PathFinder+ — Engineering Career Guidance Platform', pageW / 2, 290, { align: 'center' });
+
+    doc.save(`${profile.name.replace(/\s+/g, '_')}_Resume.pdf`);
+    setDownloading(false);
+  };
+
+  return (
+    <div className="resume-wrapper">
+      <div className="card resume-header-card">
+        <div className="card-header">
+          <FileText size={32} color="#667eea" />
+          <div>
+            <h2 className="card-title">Resume Builder</h2>
+            <p className="card-description">
+              Auto-generated from your completed skills and projects — download as PDF
+            </p>
+          </div>
+        </div>
+
+        <button
+          className="btn btn-primary resume-download-btn"
+          onClick={downloadPDF}
+          disabled={downloading}
+        >
+          <Download size={18} />
+          {downloading ? 'Generating PDF…' : 'Download PDF'}
+        </button>
+      </div>
+
+      <div className="resume-paper">
+        <div className="resume-hero">
+          <div className="resume-hero-avatar">
+            <User size={40} color="white" />
+          </div>
+          <div>
+            <h1 className="resume-name">{profile.name}</h1>
+            <p className="resume-role">
+              {profile.careerPath || profile.branch} &nbsp;•&nbsp; {profile.branch} &nbsp;•&nbsp; Year {profile.year}
+            </p>
+          </div>
+        </div>
+
+        <div className="resume-body">
+          <section className="resume-section">
+            <div className="resume-section-heading">
+              <Award size={16} />
+              Career Objective
+            </div>
+            <p className="resume-objective">{careerObjective}</p>
+          </section>
+
+          <section className="resume-section">
+            <div className="resume-section-heading">
+              <BookOpen size={16} />
+              Education
+            </div>
+            <div className="resume-edu-row">
+              <span className="resume-edu-degree">B.E. {profile.branch}</span>
+              <span className="resume-edu-meta">Year {profile.year} &nbsp;(Currently Enrolled)</span>
+            </div>
+          </section>
+
+          <section className="resume-section">
+            <div className="resume-section-heading">
+              <Code size={16} />
+              Technical Skills
+              <span className="resume-count-badge">{completedSkills.length}</span>
+            </div>
+            {completedSkills.length > 0 ? (
+              <div className="resume-skills-grid">
+                {completedSkills.map(skill => (
+                  <span key={skill.id} className="resume-skill-chip">
+                    {skill.name}
+                  </span>
+                ))}
+              </div>
+            ) : (
+              <p className="resume-empty">Complete skills in your roadmap to see them here.</p>
+            )}
+          </section>
+
+          {certifications.length > 0 && (
+            <section className="resume-section">
+              <div className="resume-section-heading">
+                <Award size={16} />
+                Certifications
+                <span className="resume-count-badge">{certifications.length}</span>
+              </div>
+              <div className="resume-certs-list">
+                {certifications.map(cert => (
+                  <div key={cert.id} className="resume-cert-item">
+                    <span className="resume-cert-name">{cert.name}</span>
+                    <span className="resume-cert-meta">
+                      {cert.issuer}
+                      {cert.issueDate && <> &nbsp;•&nbsp; {cert.issueDate}</>}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
+
+          <section className="resume-section">
+            <div className="resume-section-heading">
+              <Briefcase size={16} />
+              Projects
+              <span className="resume-count-badge">{projectDetails.length}</span>
+            </div>
+            {projectDetails.length > 0 ? (
+              <div className="resume-projects-list">
+                {projectDetails.map(project => (
+                  <div key={project.id} className="resume-project-item">
+                    <div className="resume-project-title-row">
+                      <span className="resume-project-title">{project.title}</span>
+                      <span className={`resume-diff-badge resume-diff-${project.difficulty}`}>
+                        {project.difficulty}
+                      </span>
+                    </div>
+                    <p className="resume-project-desc">{project.description}</p>
+                    <div className="resume-project-meta">
+                      <span>{project.estimatedDuration}</span>
+                      <span>•</span>
+                      <span>{project.requiredSkills.length} skills used</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <p className="resume-empty">Complete projects to feature them on your resume.</p>
+            )}
+          </section>
+        </div>
+
+        <div className="resume-footer">
+          Generated by PathFinder+ — Engineering Career Guidance Platform
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default ResumeBuilder;

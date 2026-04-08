@@ -1,0 +1,207 @@
+
+.profile-editor-card {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.pe-error {
+  background: #fee2e2;
+  color: #991b1b;
+  border: 1px solid #fca5a5;
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 13px;
+  margin-bottom: 16px;
+}
+
+.pe-success {
+  background: #f0fdf4;
+  color: #166534;
+  border: 1px solid #86efac;
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 13px;
+  margin-bottom: 16px;
+}
+
+.pe-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.pe-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.pe-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.pe-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #374151;
+}
+
+.pe-input {
+  border: 1.5px solid #d1d5db;
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 14px;
+  font-family: inherit;
+  color: #1e1e1e;
+  background: #fff;
+  transition: border-color 0.2s;
+}
+
+.pe-input:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.15);
+}
+
+.pe-warning {
+  font-size: 12px;
+  color: #f59e0b;
+  background: #fffbeb;
+  border: 1px solid #fde68a;
+  border-radius: 6px;
+  padding: 6px 10px;
+  margin: 0;
+}
+
+.pe-input-locked {
+  background: #f3f4f6;
+  color: #6b7280;
+  cursor: not-allowed;
+  opacity: 1;
+}
+
+.pe-locked-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #9ca3af;
+  background: #f3f4f6;
+  border: 1px solid #e5e7eb;
+  border-radius: 20px;
+  padding: 2px 8px;
+  margin-left: 8px;
+  vertical-align: middle;
+}
+
+.pe-lock-hint {
+  font-size: 11px;
+  color: #9ca3af;
+  margin: 0;
+}
+
+.pe-field-desc {
+  font-size: 12px;
+  color: #6b7280;
+  margin: 0;
+}
+
+.pe-tag-explore {
+  background: #f0fdf4;
+  color: #15803d;
+  border-color: #86efac;
+}
+
+
+.pe-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.pe-tag {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: #f0f3ff;
+  color: #4a5dcc;
+  border: 1px solid #c7d0f8;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 5px 12px;
+  border-radius: 20px;
+}
+
+.pe-tag-remove {
+  border: none;
+  background: none;
+  cursor: pointer;
+  padding: 0;
+  line-height: 0;
+  color: #a5b4fc;
+  transition: color 0.15s;
+}
+
+.pe-tag-remove:hover { color: #ef4444; }
+
+.pe-tag-input-row {
+  display: flex;
+  gap: 8px;
+}
+
+.pe-tag-input { flex: 1; }
+
+.pe-tag-add-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 14px;
+}
+
+
+.pe-save-btn {
+  align-self: flex-start;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 28px;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+@keyframes pe-spin { to { transform: rotate(360deg); } }
+.pe-spinner { animation: pe-spin 1s linear infinite; }
+
+@media (max-width: 640px) {
+  .pe-row { grid-template-columns: 1fr; }
+  .pe-save-btn { width: 100%; justify-content: center; }
+}
+
+/* ── Explore Career Path section ─────────────────────────────── */
+.pe-explore-selectors {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.pe-explore-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  align-self: flex-start;
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: 600;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  border: none;
+  color: #fff;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+
+.pe-explore-btn:hover { opacity: 0.88; }
